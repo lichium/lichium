@@ -24,7 +24,7 @@ class Example(QWidget):
         super(Example, self).__init__()
         # resize设置宽高，move设置位置
         self.size = QApplication.desktop()
-        self.resize(self.size.width()-15, int(self.size.height()*0.96))
+        self.resize(self.size.width()-15, self.size.height())
         self.move(15, 0)
         self.setWindowTitle("批注")
         self.setMouseTracking(False)
@@ -36,8 +36,8 @@ class Example(QWidget):
     def paintEvent(self, event):
         painter = QPainter()
         painter.begin(self)
-        painter.fillRect(0, 0, self.size.width(), int(
-            self.size.height()*0.96), QColor(0, 0, 0, 1))
+        painter.fillRect(0, 0, self.size.width(),
+            self.size.height(), QColor(0, 0, 0, 1))
         if len(pos_xy) > 1:
             point_start = pos_xy[0]
             for pos_tmp in pos_xy:
