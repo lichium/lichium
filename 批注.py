@@ -9,9 +9,10 @@
     钮为别为红蓝绿色画笔。实现原理是在屏幕上置顶一个背景不透明度为1的窗口。
 
 借鉴：https://www.cnblogs.com/PyLearn/p/7689170.html
-任何开发旨在学习用途，侵权请联系删除
+一切开发旨在学习用途，禁用于非法用途，不鼓励用于商业用途，侵权请联系删除
 windows下测试正常，高性能。
-'''import sys
+'''
+import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QRadioButton, QPushButton)
 from PyQt5.QtGui import (QPainter, QPen, QColor)
 from PyQt5.QtCore import Qt
