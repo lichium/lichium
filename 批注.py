@@ -7,9 +7,11 @@
     便利的问题，多次报修无果，大悲，作此程序。
 简介：运行程序，在屏幕左侧偏下生成一个小窗口，勾选第一个开关即开启批注，你可以在屏幕上乱画，RBG按
     钮为别为红蓝绿色画笔。实现原理是在屏幕上置顶一个背景不透明度为1的窗口。
-性能：闲置时占用约17MB内存
-'''
-import sys
+
+借鉴：https://www.cnblogs.com/PyLearn/p/7689170.html
+任何开发旨在学习用途，侵权请联系删除
+windows下测试正常，高性能。
+'''import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QRadioButton, QPushButton)
 from PyQt5.QtGui import (QPainter, QPen, QColor)
 from PyQt5.QtCore import Qt
@@ -21,7 +23,7 @@ class Example(QWidget):
         super(Example, self).__init__()
         # resize设置宽高，move设置位置
         self.size = QApplication.desktop()
-        self.resize(self.size.width()-15, int(self.size.height()))
+        self.resize(self.size.width()-15, int(self.size.height()*0.96))
         self.move(15, 0)
         self.setWindowTitle("批注")
         self.setMouseTracking(False)
@@ -34,7 +36,7 @@ class Example(QWidget):
         painter = QPainter()
         painter.begin(self)
         painter.fillRect(0, 0, self.size.width(), int(
-            self.size.height()), QColor(0, 0, 0, 1))
+            self.size.height()*0.96), QColor(0, 0, 0, 1))
         if len(pos_xy) > 1:
             point_start = pos_xy[0]
             for pos_tmp in pos_xy:
@@ -68,7 +70,6 @@ class Example(QWidget):
 class Trigger(QWidget):
     def __init__(self):
         super(Trigger, self).__init__()
-        self.main = Example()
         self.setWindowFlags(Qt.Tool)
         self.sizey = QApplication.desktop().height()
         self.resize(15, 73)
@@ -96,9 +97,9 @@ class Trigger(QWidget):
     def switch(self):
         global pos_xy
         if self.button.isChecked():
-            self.main.show()
+            main.show()
         else:
-            self.main.close()
+            main.close()
             del(pos_xy)
             pos_xy = []
 
@@ -110,6 +111,7 @@ class Trigger(QWidget):
 if __name__ == "__main__":
     colour = Qt.red
     app = QApplication(sys.argv)
+    main = Example()
     trigger = Trigger()
     trigger.show()
     app.exec_()
