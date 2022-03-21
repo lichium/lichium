@@ -1,6 +1,6 @@
 '''
 《批注》
-最后更改：2022-3-20
+最后更改：2022-3-21
 作者：Limpu
 
 起因：我班老师困扰于电脑自带批注功能无法被录制、PPT批注难以使用、某不知名教学软件的批注功能操作不
@@ -12,8 +12,8 @@
 一切开发旨在学习用途，禁用于非法用途，不鼓励用于商业用途，侵权请联系删除
 windows下测试正常，高性能。
 '''
-import sys
-from PyQt5.QtWidgets import (QApplication, QWidget, QRadioButton, QPushButton)
+from sys import argv
+from PyQt5.QtWidgets import (QApplication, QWidget, QRadioButton, QPushButton, QLineEdit)
 from PyQt5.QtGui import (QPainter, QPen, QColor)
 from PyQt5.QtCore import Qt
 
@@ -23,8 +23,7 @@ class Example(QWidget):
         global pos_xy
         super(Example, self).__init__()
         # resize设置宽高，move设置位置
-        self.size = QApplication.desktop()
-        self.resize(self.size.width()-15, self.size.height())
+        self.resize(screenSizeX-15, screenSizeY)
         self.move(15, 0)
         self.setWindowTitle("批注")
         self.setMouseTracking(False)
@@ -34,10 +33,11 @@ class Example(QWidget):
         pos_xy = []
 
     def paintEvent(self, event):
+        global penSize
         painter = QPainter()
         painter.begin(self)
-        painter.fillRect(0, 0, self.size.width(),
-            self.size.height(), QColor(0, 0, 0, 1))
+        painter.fillRect(0, 0, self.width(),
+                         self.height(), QColor(0, 0, 0, 1))
         if len(pos_xy) > 1:
             point_start = pos_xy[0]
             for pos_tmp in pos_xy:
@@ -48,7 +48,7 @@ class Example(QWidget):
                 if point_start == (-1, -1, 0):
                     point_start = point_end
                     continue
-                painter.setPen(QPen(point_start[2], 2, Qt.SolidLine))
+                painter.setPen(QPen(point_start[2], penSize, Qt.SolidLine))
                 painter.drawLine(
                     point_start[0], point_start[1], point_end[0], point_end[1])
                 point_start = point_end
@@ -72,9 +72,8 @@ class Trigger(QWidget):
     def __init__(self):
         super(Trigger, self).__init__()
         self.setWindowFlags(Qt.Tool)
-        self.sizey = QApplication.desktop().height()
-        self.resize(15, 73)
-        self.move(0, self.sizey-200)
+        self.resize(15, 88)
+        self.move(0, screenSizeY-200)
         self.setWindowTitle("批注开关")
         self.setMouseTracking(False)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint |
@@ -94,6 +93,10 @@ class Trigger(QWidget):
         self.g.resize(15, 20)
         self.g.move(0, 53)
         self.g.clicked.connect(lambda: self.setColour(Qt.darkGreen))
+        self.input = QLineEdit(self)
+        self.input.resize(15,15)
+        self.input.move(0,73)
+        self.input.textChanged.connect(self.setSize)
 
     def switch(self):
         global pos_xy
@@ -107,11 +110,18 @@ class Trigger(QWidget):
     def setColour(self, c):
         global colour
         colour = c
-
+    
+    def setSize(self, text):
+        global penSize
+        try:
+            penSize = int(text)
+        except:
+            penSize = 2
 
 if __name__ == "__main__":
-    colour = Qt.red
-    app = QApplication(sys.argv)
+    colour, penSize = Qt.red, 2
+    app = QApplication(argv)
+    screenSizeX, screenSizeY = app.desktop().width(), app.desktop().height()
     main = Example()
     trigger = Trigger()
     trigger.show()
