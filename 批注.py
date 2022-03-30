@@ -10,7 +10,7 @@
 
 借鉴：https://www.cnblogs.com/PyLearn/p/7689170.html
 一切开发旨在学习用途，禁用于非法用途，不鼓励用于商业用途，侵权请联系删除
-windows下测试正常，高性能。
+windows 64位下测试正常。
 '''
 from sys import argv
 from PyQt5.QtWidgets import (QApplication, QWidget, QRadioButton, QPushButton, QLineEdit)
