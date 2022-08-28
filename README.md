@@ -1,6 +1,4 @@
 ## 林浦，高中党。I'm Limpu, a senior high school student.
 ![stats](https://github-readme-stats.vercel.app/api/top-langs/?username=limpu403&layout=compact)
-### 导航GUIDE
-[LiCat-QQbot](https://github.com/Limpu403/Limpu403/tree/main/LiCat) 、
-[TENET-简陋GUI](https://github.com/Limpu403/Limpu403/tree/main/TENET-GUI)、
-[批注](https://github.com/Limpu403/limpu403/blob/main/批注.py)
+
+**代码大多无注释，部分甚至无法运行。<br>为了您的身体健康，请慎重查阅。<br>**
