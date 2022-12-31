@@ -2,5 +2,3 @@
 ![stats](https://github-readme-stats.vercel.app/api/top-langs/?username=limpu403&layout=compact)
 
 **代码大多无注释，部分甚至无法运行。<br>为了您的身体健康，请慎重查阅。<br>**
-
-https://www.bilibili.com/read/cv19760658/
