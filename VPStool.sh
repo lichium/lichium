@@ -20,7 +20,7 @@ wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && bash men
 elif [ cmd == 2 ]
 then
 bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
-elif [ cmd == 3]
+elif [ cmd == 3 ]
 then
 whereis python
 elif [ cmd == 4 ]
