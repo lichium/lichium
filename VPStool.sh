@@ -9,8 +9,9 @@ echo "4. 安装pip3"
 
 echo "5. 安装nb-cli"
 echo "6. 安装gocq插件"
+echo "7. 不挂断地运行bot"
 
-echo "请输入[1-6]："
+echo "请输入[1-7]："
 
 read cmd
 
@@ -34,6 +35,10 @@ pip3 install nb-cli
 elif [ $cmd == 6 ]
 then
 nb plugin install nonebot-plugin-gocqhttp
+elif [ $cmd == 7 ]
+then
+cd ~/bot
+nohup nb run >/dev/null 2>&1 &
 else
 echo "认真输入了吗？"
 fi 
