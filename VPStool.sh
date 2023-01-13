@@ -38,7 +38,7 @@ nb plugin install nonebot-plugin-gocqhttp
 elif [ $cmd == 7 ]
 then
 cd ~/bot
-nohup nb run >/dev/null 2>&1 &
+nohup python3 bot.py >/dev/null 2>&1 &
 else
 echo "认真输入了吗？"
 fi 
